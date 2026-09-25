@@ -24,6 +24,13 @@
 
 * { box-sizing: border-box; }
 
+/* IMPORTANT: the `hidden` attribute is only `display: none` in the browser's own
+   stylesheet, so ANY display rule we set on an element overrides it. The
+   lightbox and the gate both set `display: grid`, which silently left them
+   permanently visible once hidden — a dark overlay with an empty <img> sitting
+   on top of the whole page. This rule makes `hidden` win. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; }
 
 body {
