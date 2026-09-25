@@ -37,7 +37,7 @@ const NOTE = [
   "But honestly, tu meri life ka ek bahut important part hai ❤️ joh kabhi koi replace nahi krksta ...🤗💋... Meri life savior, meri partner in all crime😎😎 and  bakwaas🤓😛.Tere saath ladna🫣, tujhe irritate karna 😁🤪aur phir thodi der baad sab normal ho jaana 🤣❤️ usmaah toh ek alag hi sukoon haii😌...I knw I don't express u much....but I love u very much 🫶💋",
   "Abhi toh hum virtual birthday celebrate kar rahe hain 🥹❤️ but bahut jaldi paas rehke proper birthday celebrate karenge🥳🥳, saath mein masti karenge 🎊🎉aur bahut saara time spend karenge🥹🫶🏻...and double party krenge iss baar ...🧸🎁",
   "Bas hamesha aise hi khush reh💋🥰, haste reh🤗🫶, aur apna ye drama kabhi band mat karna 😂😂..keep entertaining us...🫣🤪🤪... Bhagwan tujhe woh sab de jo tu chahti hai ❤️🤗😘..saari wishes Puri ho😌😌🤞.",
-  "Enjoy ur day...🎉🎊Love you loads meri adopted😌, dramebaaz🥰, life-saviour behen ❤️🫶🏻",
+  "Enjoy ur day...🎉🎊Love you loads meri adopted😌, dramebaaz🥰, life-savior behen ❤️🫶🏻",
   "Happy Birthday once againnn! 🎂🥹❤️",
 ];
 
