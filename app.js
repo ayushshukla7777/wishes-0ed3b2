@@ -325,6 +325,9 @@
 
   /* -------------------------------------------------------------------- CAKE */
   function initCake() {
+    $("#cakeTitle").textContent = COPY.cakeTitle;
+    $("#cakeLead").textContent = COPY.cakeLead;
+
     const N = Math.max(1, CONFIG.CANDLES | 0);
     const candles = Array.from({ length: N }, (_, i) => {
       const gap = 190 / (N + 1);
