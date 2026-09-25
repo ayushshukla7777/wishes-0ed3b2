@@ -50,13 +50,25 @@ body.no-scroll { overflow: hidden; }
 .script { font-family: var(--script); font-weight: 400; }
 
 /* --------------------------------------------------------------- LOCK SCREEN */
+/* PHONE FIX. The card used to be `width: min(430px, 100%)` inside a grid using
+   `place-items: center`. A percentage inside an auto-sized grid track resolves
+   against that track's max-content size, not the viewport, so the card came out
+   426px wide on EVERY phone: at 320px the Unlock button sat 101px off the right
+   edge, and `body.locked { overflow: hidden }` meant it could not even be
+   scrolled to. The column is now explicit (`minmax(0, 1fr)`, a definite track),
+   so 100% really means the screen; the card centres with `margin: auto` so a
+   card taller than the screen overflows downward and stays scrollable instead
+   of being clipped top and bottom. */
 .gate {
   position: fixed;
   inset: 0;
   z-index: 60;
   display: grid;
-  place-items: center;
-  padding: 24px;
+  grid-template-columns: minmax(0, 1fr);   /* definite track: makes 100% = screen */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));
   background: linear-gradient(180deg, #150a19, #24132b 60%, #150a19);
   transition: opacity .6s ease, transform .6s ease;
 }
@@ -65,7 +77,9 @@ body.no-scroll { overflow: hidden; }
 
 .gate__card {
   position: relative;
-  width: min(430px, 100%);
+  margin: auto;                 /* centres it, and never clips the top when tall */
+  width: 100%;
+  max-width: 430px;
   padding: 34px 28px 26px;
   text-align: center;
   border-radius: 22px;
@@ -127,6 +141,19 @@ body.no-scroll { overflow: hidden; }
 
 .gate__error { min-height: 1.2em; margin: 12px 0 0; font-size: .86rem; color: var(--rose); }
 .gate__fine { margin: 14px 0 0; font-size: .72rem; color: rgba(195, 169, 189, .65); }
+
+/* Small phones: give the card more room, and stack the field above the button
+   once a side-by-side row would squeeze the input to nothing. */
+@media (max-width: 400px) {
+  .gate__card { padding: 26px 20px 20px; border-radius: 18px; }
+  .gate__title { font-size: 1.5rem; }
+  .gate__title .script { font-size: 1.85rem; }
+  .gate__hint { margin-bottom: 14px; }
+}
+@media (max-width: 370px) {
+  .gate__form { flex-direction: column; }
+  .gate__form .btn { width: 100%; }
+}
 
 /* --------------------------------------------------------------------- HERO */
 .hero {
@@ -215,34 +242,75 @@ body.no-scroll { overflow: hidden; }
 }
 
 /* ------------------------------------------------------------------- FRAMES */
-.frames { columns: 3 250px; column-gap: 24px; }
-@media (max-width: 700px) { .frames { columns: 2 150px; column-gap: 14px; } }
+/* A wall of prints hung by hand: each one in a bright ivory mount with a gold
+   fillet and a sheet of glass over it, every photo at its own small angle, and
+   it straightens and lifts when you reach for it.
+
+   The tilt lives on the MOUNT, not on `.frame`: the figures carry `.reveal`,
+   and `.reveal.in { transform: none }` sits later in this file at the same
+   specificity, so any transform set on `.frame` is silently thrown away. */
+.frames { columns: 3 250px; column-gap: 28px; }
+@media (max-width: 700px) { .frames { columns: 2 150px; column-gap: 16px; } }
 
 .frame {
-  margin: 0 0 24px;
+  position: relative;
+  margin: 0 0 30px;
   break-inside: avoid;
   cursor: zoom-in;
-  transition: transform .35s ease;
 }
-@media (max-width: 700px) { .frame { margin-bottom: 14px; } }
-.frame:hover { transform: translateY(-5px); }
+@media (max-width: 700px) { .frame { margin-bottom: 20px; } }
 
-/* the mount: a warm cream border with a thin gold line inside it */
+/* the mount: thick ivory card, gold hairline around the print, deep shadow so
+   it stands off the plum wall */
 .frame__mount {
+  --tilt: -1.3deg;
   position: relative;
-  padding: 11px;
+  padding: 13px 13px 21px;            /* deeper lip at the bottom: a matted print */
   border-radius: 3px;
-  background: linear-gradient(150deg, #fbf3e7 0%, #efe0cb 55%, #e2cdb1 100%);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, 0) 26%),
+    linear-gradient(155deg, #fffdf8 0%, #f8ecd9 48%, #e8d1b0 100%);
   box-shadow:
-    0 16px 34px rgba(0, 0, 0, .48),
-    0 2px 0 rgba(255, 255, 255, .5) inset,
-    0 -2px 6px rgba(120, 84, 40, .18) inset;
+    0 30px 46px -14px rgba(0, 0, 0, .68),
+    0 8px 18px rgba(0, 0, 0, .3),
+    0 1px 0 rgba(255, 255, 255, .9) inset,
+    0 -1px 0 rgba(120, 84, 40, .22) inset,
+    0 0 0 1px rgba(184, 134, 59, .5);
+  transform: rotate(var(--tilt));
+  transition: transform .5s cubic-bezier(.2, .8, .25, 1), box-shadow .5s ease;
 }
+/* no two photos hang at quite the same angle */
+.frame:nth-child(6n+1) .frame__mount { --tilt: -1.9deg; }
+.frame:nth-child(6n+2) .frame__mount { --tilt:  1.2deg; }
+.frame:nth-child(6n+3) .frame__mount { --tilt: -0.7deg; }
+.frame:nth-child(6n+4) .frame__mount { --tilt:  2.1deg; }
+.frame:nth-child(6n+5) .frame__mount { --tilt: -1.5deg; }
+.frame:nth-child(6n+6) .frame__mount { --tilt:  0.6deg; }
+
+.frame:hover .frame__mount,
+.frame:focus-within .frame__mount {
+  transform: rotate(0deg) translateY(-9px) scale(1.03);
+  box-shadow:
+    0 40px 62px -16px rgba(0, 0, 0, .72),
+    0 12px 24px rgba(0, 0, 0, .34),
+    0 1px 0 rgba(255, 255, 255, .95) inset,
+    0 -1px 0 rgba(120, 84, 40, .22) inset,
+    0 0 0 1px rgba(224, 179, 102, .85),
+    0 0 34px rgba(224, 179, 102, .22);
+}
+.frame:hover, .frame:focus-within { z-index: 3; }
+
+/* the gold fillet inside the mount, plus the sheen of glass across the print.
+   This is ::after on purpose: a ::before would be painted UNDER the photo. */
 .frame__mount::after {
   content: "";
   position: absolute;
-  inset: 7px;
-  border: 1px solid rgba(184, 134, 59, .45);
+  inset: 8px;
+  border: 1px solid rgba(184, 134, 59, .55);
+  background: linear-gradient(118deg,
+    rgba(255, 255, 255, .17) 0%, rgba(255, 255, 255, .05) 15%,
+    rgba(255, 255, 255, 0) 40%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .4) inset;
   pointer-events: none;
 }
 .frame img {
@@ -250,10 +318,20 @@ body.no-scroll { overflow: hidden; }
   width: 100%;
   height: auto;
   background: var(--plum-700);
-  box-shadow: 0 0 0 1px rgba(90, 60, 30, .28) inset;
+  box-shadow: 0 0 0 1px rgba(90, 60, 30, .3) inset,
+              0 2px 8px rgba(60, 34, 10, .28);
 }
-@media (max-width: 700px) { .frame__mount { padding: 7px; } .frame__mount::after { inset: 5px; } }
-.frame:focus-within { outline: 2px solid var(--gold-2); outline-offset: 4px; }
+@media (max-width: 700px) {
+  .frame__mount { padding: 9px 9px 15px; }
+  .frame__mount::after { inset: 5px; }
+}
+.frame:focus-within { outline: 2px solid var(--gold-2); outline-offset: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .frame__mount { transform: none; transition: none; }
+  .frame:hover .frame__mount,
+  .frame:focus-within .frame__mount { transform: none; }
+}
 
 /* --------------------------------------------------------------------- NOTE */
 .note { margin-top: 8px; }
