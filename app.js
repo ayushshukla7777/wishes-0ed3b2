@@ -245,7 +245,7 @@
   const visible = PHOTOS.slice();
 
   function initGallery() {
-    $("#galleryTitle").textContent = COUNTS.title;
+    $("#galleryTitle").textContent = COPY.galleryTitle;
     $("#galleryNote").textContent = COPY.galleryNote;
 
     $("#frames").innerHTML = visible.map((id, i) => `
@@ -329,19 +329,30 @@
     $("#cakeLead").textContent = COPY.cakeLead;
 
     const N = Math.max(1, CONFIG.CANDLES | 0);
+    /* The cake's top surface is y=138 in the viewBox below. Candles have to
+       stand ON that line (drawn upwards from it), and they must be emitted
+       AFTER the cake shapes — drawn first, the tiers paint straight over them
+       and only the flames (which poke above the icing) remain visible. */
+    const TOP_Y = 138;             // top of the icing, where candles stand
+    const H = 40;                  // candle height
+    const gap = 190 / (N + 1);
+
     const candles = Array.from({ length: N }, (_, i) => {
-      const gap = 190 / (N + 1);
       const x = 65 + gap * (i + 1);
-      const y = 150;
+      const y = TOP_Y - H;         // the candle's top edge
+      const flameY = y - 16;
       return `
         <g class="candle" style="--d:${(i * 0.12).toFixed(2)}s">
-          <rect x="${(x - 4).toFixed(1)}" y="${y}" width="8" height="34" rx="3" fill="#f4e3c8"/>
-          <rect x="${(x - 4).toFixed(1)}" y="${y}" width="8" height="34" rx="3" fill="url(#stripe)"/>
+          <line x1="${x.toFixed(1)}" y1="${y}" x2="${x.toFixed(1)}" y2="${y - 6}"
+                stroke="#6b5745" stroke-width="1.6" stroke-linecap="round"/>
+          <rect x="${(x - 4.5).toFixed(1)}" y="${y}" width="9" height="${H}" rx="3.5" fill="url(#stripe)"/>
+          <rect x="${(x - 4.5).toFixed(1)}" y="${y}" width="9" height="${H}" rx="3.5"
+                fill="none" stroke="rgba(120,86,50,.3)" stroke-width=".8"/>
           <g class="flame" data-i="${i}">
-            <ellipse cx="${x.toFixed(1)}" cy="${y - 12}" rx="6" ry="11" fill="url(#flame)"/>
-            <ellipse cx="${x.toFixed(1)}" cy="${y - 8}" rx="2.6" ry="5" fill="#fff6d8" opacity=".9"/>
+            <ellipse cx="${x.toFixed(1)}" cy="${flameY}" rx="6" ry="11" fill="url(#flame)"/>
+            <ellipse cx="${x.toFixed(1)}" cy="${flameY + 4}" rx="2.6" ry="5" fill="#fff6d8" opacity=".92"/>
           </g>
-          <ellipse class="flame-hit" cx="${x.toFixed(1)}" cy="${y - 12}" rx="17" ry="24" fill="transparent"/>
+          <ellipse class="flame-hit" cx="${x.toFixed(1)}" cy="${(y + TOP_Y) / 2}" rx="13" ry="46" fill="transparent"/>
         </g>`;
     }).join("");
 
@@ -366,8 +377,6 @@
           </pattern>
         </defs>
 
-        ${candles}
-
         <ellipse cx="160" cy="262" rx="132" ry="17" fill="url(#plate)"/>
         <rect x="52" y="196" width="216" height="60" rx="12" fill="url(#sponge)"/>
         <rect x="52" y="182" width="216" height="22" rx="11" fill="url(#icing)"/>
@@ -375,6 +384,9 @@
         <rect x="84" y="138" width="152" height="18" rx="9" fill="url(#icing)"/>
         <path d="M52 196 q22 20 44 0 q22 20 44 0 q22 20 44 0 q22 20 44 0 v-14 H52z" fill="#fff4e2" opacity=".85"/>
         <path d="M84 150 q18 16 36 0 q18 16 36 0 q18 16 36 0 v-12 H84z" fill="#fff4e2" opacity=".85"/>
+
+        <!-- the candles, LAST: drawn after the cake so nothing paints over them -->
+        ${candles}
       </svg>`;
 
     let out = 0;

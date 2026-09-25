@@ -24,20 +24,8 @@ const CONFIG = {
 
 /* The photographs, in the order they appear. There are deliberately no
    captions on this page — the pictures carry themselves, and each one sits in
-   its own frame. Add or remove ids here and the count everywhere follows. */
+   its own frame. */
 const PHOTOS = Array.from({ length: 20 }, (_, i) => `a${String(i + 1).padStart(2, "0")}`);
-
-const COUNTS = (() => {
-  const n = PHOTOS.length;
-  const words = ["zero", "one", "two", "three", "four", "five", "six", "seven",
-    "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
-    "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-  const tens = ["", "", "twenty", "thirty"];
-  const numWord = (x) => (x < 20 ? words[x]
-    : tens[Math.floor(x / 10)] + (x % 10 ? "-" + words[x % 10] : ""));
-  const w = numWord(n);
-  return { photos: n, photosWord: w, title: `${w[0].toUpperCase()}${w.slice(1)} photographs` };
-})();
 
 /* ============================================================================
    THE NOTE — Anjali's words, exactly as she sent them.
@@ -57,7 +45,9 @@ const NOTE = [
 const COPY = {
   heroEyebrow: "Happy Birthday",
   heroSub: "From your dramebaaz behen, with all the love in the world ❤️",
-  galleryNote: "Twenty of you — no captions, no filter, just you.",
+  // No counts anywhere — the page never says how many photographs there are.
+  galleryTitle: "You, in pictures",
+  galleryNote: "No captions and no filters — you don't need either, dramebaaz 🫶",
   notesTitle: "A note from Anjali",
   notesLead: "Written for you, and left in her own words.",
   cakeTitle: "Make a wish",
