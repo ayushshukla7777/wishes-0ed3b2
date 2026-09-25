@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday, Ayushi</title>
+<meta name="description" content="A birthday page for Ayushi, from her sister.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+
+<!-- ============================ LOCK SCREEN ============================ -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <canvas class="gate__petals" id="gatePetals" aria-hidden="true"></canvas>
+  <div class="gate__card">
+    <div class="gate__heart" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="44" height="44"><path fill="currentColor" d="M12 21s-6.7-4.35-9.33-8.02C.9 10.3 2.07 6.3 5.6 5.4c2.1-.54 4.03.4 5.4 2.03C12.37 5.8 14.3 4.86 16.4 5.4c3.53.9 4.7 4.9 2.93 7.58C18.7 16.65 12 21 12 21z"/></svg>
+    </div>
+    <p class="gate__kicker">This page is locked</p>
+    <h1 class="gate__title" id="gateTitle">Only for <span class="script" id="gateName">Ayushi</span></h1>
+    <p class="gate__hint" id="gateHint">Who is your favorite sister?</p>
+    <form class="gate__form" id="gateForm" autocomplete="off">
+      <input class="gate__input" id="gateInput" type="text" placeholder="type her name…"
+             aria-label="Answer" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <button class="btn btn--primary" type="submit">Unlock</button>
+    </form>
+    <p class="gate__error" id="gateError" role="alert" aria-live="polite"></p>
+    <p class="gate__fine">Her photographs live on this page, so it stays locked.</p>
+  </div>
+</div>
+
+<!-- ============================== THE SITE ============================== -->
+<div id="site" hidden>
+
+  <!-- ---------------------------- HERO ---------------------------- -->
+  <header class="hero" id="hero">
+    <canvas class="hero__petals" id="heroPetals" aria-hidden="true"></canvas>
+    <div class="hero__inner">
+      <p class="hero__eyebrow" id="heroEyebrow">Happy Birthday</p>
+      <h1 class="hero__name script" id="heroName">Ayushi</h1>
+      <p class="hero__sub" id="heroSub"></p>
+      <p class="hero__from" id="heroFrom"></p>
+      <a class="hero__scroll" href="#gallery" aria-label="See the photographs">
+        <span>scroll</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- --------------------------- GALLERY -------------------------- -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <h2 class="section__title reveal" id="galleryTitle">The photographs</h2>
+      <p class="section__lead reveal" id="galleryNote"></p>
+      <div class="frames" id="frames"></div>
+    </div>
+  </section>
+
+  <!-- ---------------------------- NOTE ---------------------------- -->
+  <section class="section section--note" id="note">
+    <div class="wrap wrap--narrow">
+      <p class="section__kicker reveal">From Anjali</p>
+      <h2 class="section__title script reveal" id="notesTitle">A note from Anjali</h2>
+      <p class="section__lead reveal" id="notesLead"></p>
+      <div class="note reveal" id="noteBody"></div>
+      <p class="note__sign script reveal">— Anjali 🤍</p>
+    </div>
+  </section>
+
+  <!-- ---------------------------- CAKE ---------------------------- -->
+  <section class="section section--cake" id="cakeSection">
+    <div class="wrap wrap--narrow">
+      <h2 class="section__title reveal" id="cakeTitle">Make a wish</h2>
+      <p class="section__lead reveal" id="cakeLead"></p>
+      <div class="cake reveal" id="cake" aria-label="Birthday cake with candles"></div>
+      <p class="cake__hint" id="cakeHint"></p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot__line script">Happy Birthday, Ayushi 🎂</p>
+    <p class="foot__small">Made with love by your behen.</p>
+  </footer>
+</div>
+
+<!-- ---------------------------- LIGHTBOX ---------------------------- -->
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photograph">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+  <img class="lightbox__img" id="lightboxImg" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next">&#8250;</button>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

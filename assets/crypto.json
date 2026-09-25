@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "note": "Photographs are AES-256-GCM encrypted. The master key is wrapped once per accepted answer with PBKDF2-SHA256; it is not stored in plaintext anywhere.",
+ "kdf": {
+  "name": "PBKDF2",
+  "hash": "SHA-256",
+  "iterations": 250000,
+  "salt": "D5lBqmL29lPjj6TKWPAc/A=="
+ },
+ "wraps": [
+  {
+   "iv": "Z+lrzGx6YpZVCF3P",
+   "ct": "7mHctUBkG4vtNpYIO28y2S7maTSS9NQ/mVleSxO4wOwE0Ut9jL0YdMsYoa1yAJhP"
+  },
+  {
+   "iv": "tyukkoqQWCk0BqJ4",
+   "ct": "QtG2VKAiEbPQo4ScBFioT+ng0IXMd3VHrvF6n5aECNHGmW9hKvAxoVH8owCoVXgf"
+  }
+ ],
+ "files": {
+  "a01.thumb": "a01_thumb.bin",
+  "a02.thumb": "a02_thumb.bin",
+  "a03.thumb": "a03_thumb.bin",
+  "a04.thumb": "a04_thumb.bin",
+  "a05.thumb": "a05_thumb.bin",
+  "a06.thumb": "a06_thumb.bin",
+  "a07.thumb": "a07_thumb.bin",
+  "a08.thumb": "a08_thumb.bin",
+  "a09.thumb": "a09_thumb.bin",
+  "a10.thumb": "a10_thumb.bin",
+  "a11.thumb": "a11_thumb.bin",
+  "a12.thumb": "a12_thumb.bin",
+  "a13.thumb": "a13_thumb.bin",
+  "a14.thumb": "a14_thumb.bin",
+  "a15.thumb": "a15_thumb.bin",
+  "a16.thumb": "a16_thumb.bin",
+  "a17.thumb": "a17_thumb.bin",
+  "a18.thumb": "a18_thumb.bin",
+  "a19.thumb": "a19_thumb.bin",
+  "a20.thumb": "a20_thumb.bin",
+  "a01.full": "a01_full.bin",
+  "a02.full": "a02_full.bin",
+  "a03.full": "a03_full.bin",
+  "a04.full": "a04_full.bin",
+  "a05.full": "a05_full.bin",
+  "a06.full": "a06_full.bin",
+  "a07.full": "a07_full.bin",
+  "a08.full": "a08_full.bin",
+  "a09.full": "a09_full.bin",
+  "a10.full": "a10_full.bin",
+  "a11.full": "a11_full.bin",
+  "a12.full": "a12_full.bin",
+  "a13.full": "a13_full.bin",
+  "a14.full": "a14_full.bin",
+  "a15.full": "a15_full.bin",
+  "a16.full": "a16_full.bin",
+  "a17.full": "a17_full.bin",
+  "a18.full": "a18_full.bin",
+  "a19.full": "a19_full.bin",
+  "a20.full": "a20_full.bin"
+ }
+}

@@ -1,0 +1,14 @@
+# The plaintext media never goes into git — the repo is public. Only the
+# encrypted copies under assets/enc/ (plus assets/crypto.json) are committed.
+assets/photo/
+assets/video/
+
+# The accepted answers, needed to build but never to publish.
+tools/.answers
+tools/.passwords
+
+# Local test scaffolding
+_test.html
+_ping.txt
+_dbg*.html
+*.log
