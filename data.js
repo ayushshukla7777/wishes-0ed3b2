@@ -44,12 +44,11 @@ const NOTE = [
 /* Small lines for the hero and the section headings. */
 const COPY = {
   heroEyebrow: "Happy Birthday",
-  heroSub: "From your dramebaaz behen, with all the love in the world ❤️",
+  heroSub: "From your caring behen",
   // No counts anywhere — the page never says how many photographs there are.
   galleryTitle: "You, in pictures",
   galleryNote: "Every mood, every version of you — my dramebaaz behen 🫶",
   notesTitle: "A note from Anjali",
-  notesLead: "Written for you, and left in her own words.",
   cakeTitle: "Make a wish",
   cakeLead: "Blow out the candles — tap them 🎂",
   cakeHint: "tap the flames",

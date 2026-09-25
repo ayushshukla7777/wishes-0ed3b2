@@ -319,7 +319,6 @@
   /* -------------------------------------------------------------------- NOTE */
   function initNote() {
     $("#notesTitle").textContent = COPY.notesTitle;
-    $("#notesLead").textContent = COPY.notesLead;
     $("#noteBody").innerHTML = NOTE.map((p) => `<p>${p}</p>`).join("");
   }
 
