@@ -47,7 +47,7 @@ const COPY = {
   heroSub: "From your dramebaaz behen, with all the love in the world ❤️",
   // No counts anywhere — the page never says how many photographs there are.
   galleryTitle: "You, in pictures",
-  galleryNote: "No captions and no filters — you don't need either, dramebaaz 🫶",
+  galleryNote: "Every mood, every version of you — my dramebaaz behen 🫶",
   notesTitle: "A note from Anjali",
   notesLead: "Written for you, and left in her own words.",
   cakeTitle: "Make a wish",
